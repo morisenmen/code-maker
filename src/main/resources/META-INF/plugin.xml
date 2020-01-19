@@ -1,0 +1,26 @@
+<idea-plugin>
+    <id>codemaker</id>
+    <name>代码生成器</name>
+    <vendor email="morisenmen@gmail.com" url="https://github.com/morisenmen/code-maker">morisenmen</vendor>
+
+    <description><![CDATA[
+    自定义模板代码生成器<br>
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="CodeMakerAction" class="com.github.morisenmen.codemaker.action.CodeMakerAction" text="生成代码" description="生成代码">
+            <add-to-group group-id="GenerateGroup" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

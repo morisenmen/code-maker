@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.14'
+}
+
+group 'com.github.morisenmen.codemaker'
+version '1.0-SNAPSHOT'
+
+task fatJar(type: Jar) {
+    archiveName = 'code-maker.jar'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.47'
+    compile 'freemarker:freemarker:2.3.9'
+    compile 'org.freemarker:freemarker:2.3.27-incubating'
+
+    testCompile 'junit:junit:4.12'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2019.3.1'
+}
+patchPluginXml {
+    changeNotes """
+      初始化<br>
+      <em>适配最新版本idea</em>"""
+}

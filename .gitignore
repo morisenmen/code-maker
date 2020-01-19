@@ -1,0 +1,36 @@
+# Gradle temporary files
+.gradle/
+build/
+classes/
+target/
+
+# IDE
+*.iml
+*.ipr
+*.iws
+*.ids
+.project
+.classpath
+.settings/
+.idea/
+out/
+
+# log
+logs/
+
+# vi
+*.swp
+
+# ios
+.DS_Store
+
+# disconf
+disconf/
+
+# cache
+${registry.cache.file}.lock
+${registry.cache.file}
+
+# gen config file
+CodeMakerConfig.xml
+code-maker-config.xml

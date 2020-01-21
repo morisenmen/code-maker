@@ -19,6 +19,7 @@ import com.intellij.openapi.ui.Messages;
 import freemarker.template.TemplateException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -90,11 +91,20 @@ public class CodeMakerAction extends AnAction {
         if (Objects.nonNull(codeMakerConfig.getTemplate()) && Objects.nonNull(codeMakerConfig.getTemplate().getPath())) {
             // 拿到配置值
             path = trimPath(codeMakerConfig.getTemplate().getPath());
-            if (!path.startsWith(Const.SEPARATOR)) {
-                path = projectPath + path;
+            File file = new File(path);
+            if (!file.exists()) {
+                throw new FileNotFoundException("给定的模板路径不存在");
             }
-            // 拿到ftl位置
-            String resourcePath = path + Const.SEPARATOR + Const.FTL;
+            String resourcePath = null;
+            for (File listFile : file.listFiles()) {
+                if (Const.FTL.equals(listFile.getName())) {
+                    resourcePath = listFile.getAbsolutePath();
+                    break;
+                }
+            }
+            if (Objects.isNull(resourcePath)) {
+                throw new FileNotFoundException("模板文件ftl列表不存在");
+            }
 
             ftlFileList = CodeMakerUtil.traverseFolder(resourcePath, resourcePath);
         } else {

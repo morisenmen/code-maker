@@ -217,7 +217,7 @@ public class CodeMakerUtil {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
-    public static List<String> traverseFolder(String prefix, String path) throws URISyntaxException {
+    public static List<String> traverseFolder(String prefix, String path) {
         List<String> fileList = new LinkedList<>();
         File parentFile = new File(path);
         if (parentFile.exists()) {
@@ -318,7 +318,7 @@ public class CodeMakerUtil {
         return result.toString();
     }
 
-    private static boolean isWin() {
+    public static boolean isWin() {
         String osName = System.getProperty("os.name");
 
         return osName.startsWith("Windows");

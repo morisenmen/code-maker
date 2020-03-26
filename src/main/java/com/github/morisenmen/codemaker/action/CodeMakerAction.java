@@ -90,21 +90,11 @@ public class CodeMakerAction extends AnAction {
         String path = null;
         if (Objects.nonNull(codeMakerConfig.getTemplate()) && Objects.nonNull(codeMakerConfig.getTemplate().getPath())) {
             // 拿到配置值
-            path = trimPath(codeMakerConfig.getTemplate().getPath());
-            File file = new File(path);
-            if (!file.exists()) {
-                throw new FileNotFoundException("给定的模板路径不存在");
+            if (!path.startsWith(Const.SEPARATOR)) {
+                path = projectPath + path;
             }
-            String resourcePath = null;
-            for (File listFile : file.listFiles()) {
-                if (Const.FTL.equals(listFile.getName())) {
-                    resourcePath = listFile.getAbsolutePath();
-                    break;
-                }
-            }
-            if (Objects.isNull(resourcePath)) {
-                throw new FileNotFoundException("模板文件ftl列表不存在");
-            }
+            // 拿到ftl位置
+            String resourcePath = path + Const.SEPARATOR + Const.FTL;
 
             ftlFileList = CodeMakerUtil.traverseFolder(resourcePath, resourcePath);
         } else {
